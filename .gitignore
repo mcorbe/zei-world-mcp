@@ -1,0 +1,8 @@
+node_modules/
+build/
+.env
+.vercel
+.idea/
+*.tgz
+*.pdf
+claude-debug.log

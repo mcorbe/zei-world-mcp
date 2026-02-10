@@ -1,0 +1,22 @@
+{
+  "name": "zei-world-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Zei World ESG/CSR data",
+  "type": "module",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "vercel-build": "tsc",
+    "start": "node build/index.js",
+    "start:http": "node build/local-http.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "cheerio": "^1.0.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "typescript": "^5.7.3"
+  }
+}
