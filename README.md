@@ -68,6 +68,42 @@ docker run -p 3000:3000 zei-world-mcp
 
 The project includes a serverless handler at `api/mcp.ts` with a `vercel.json` config. Deploy by connecting the repo to Vercel — the endpoint will be available at `/mcp`.
 
+## Examples
+
+Once connected to an MCP client, you can ask questions in natural language. Here are a few things you can try:
+
+> What ESG sectors are available on Zei World?
+
+Uses `list_sectors` to return all 31 sectors.
+
+> Show me the activities in the "Alimentation, agriculture et elevage" sector
+
+Uses `list_activities` to list sub-categories like organic farming, beverages, etc.
+
+> Search for "Patagonia"
+
+Uses `search_company` to find the company and return its ID.
+
+> What's the ESG profile of Patagonia?
+
+Uses `get_company_profile` to show E/S/G scores, classifications, sector, and verification date.
+
+> How does Patagonia score on environmental criteria specifically?
+
+Uses `get_company_criteria` with category `Environnement` to show each criterion, its coefficient, and score.
+
+> Compare Patagonia and The North Face on their ESG scores
+
+Uses `compare_companies` to display a side-by-side comparison of both companies.
+
+> Who are the top-ranked companies in Patagonia's activity?
+
+Uses `get_activity_ranking` to list all companies in the same activity, sorted by score.
+
+> Show me the governance ranking in the digital sector
+
+Chains `list_activities` to find the right activity, then `get_activity_ranking` with category `Gouvernance`.
+
 ## Project structure
 
 ```
