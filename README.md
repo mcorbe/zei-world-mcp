@@ -76,31 +76,31 @@ Once connected to an MCP client, you can ask questions in natural language. Here
 
 Uses `list_sectors` to return all 31 sectors.
 
-> Show me the activities in the "Alimentation, agriculture et elevage" sector
+> Show me the activities in the food & agriculture sector
 
-Uses `list_activities` to list sub-categories like organic farming, beverages, etc.
+Uses `list_activities` to list sub-categories like organic farming, breweries, dairy, etc.
 
-> Search for "Patagonia"
+> Search for "Hopaal"
 
-Uses `search_company` to find the company and return its ID.
+Uses `search_company` to find the sustainable fashion brand and return its ID.
 
-> What's the ESG profile of Patagonia?
+> What's the ESG profile of Comme Avant?
 
-Uses `get_company_profile` to show E/S/G scores, classifications, sector, and verification date.
+Uses `get_company_profile` to show their scores (72% on Environment) and classifications across E/S/G.
 
-> How does Patagonia score on environmental criteria specifically?
+> How does Les 2 Marmottes score on environmental criteria?
 
 Uses `get_company_criteria` with category `Environnement` to show each criterion, its coefficient, and score.
 
-> Compare Patagonia and The North Face on their ESG scores
+> Compare Hopaal and Balzac Paris on their ESG scores
 
-Uses `compare_companies` to display a side-by-side comparison of both companies.
+Uses `compare_companies` to display a side-by-side comparison of both fashion brands.
 
-> Who are the top-ranked companies in Patagonia's activity?
+> Who are the top-ranked eco-friendly banks?
 
-Uses `get_activity_ranking` to list all companies in the same activity, sorted by score.
+Uses `list_activities` to find banking, then `get_activity_ranking` to list OnlyOne, Goodvest, Green-Got, and Helios.
 
-> Show me the governance ranking in the digital sector
+> Show me the governance ranking for cosmetics brands
 
 Chains `list_activities` to find the right activity, then `get_activity_ranking` with category `Gouvernance`.
 
