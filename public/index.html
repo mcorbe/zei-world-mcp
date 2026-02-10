@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zei World MCP Server</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #e5e5e5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+    .container { max-width: 640px; width: 100%; }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: #a3a3a3;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #166534;
+      color: #4ade80;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+    }
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1rem;
+      margin-top: 2.5rem;
+    }
+    .endpoint-box {
+      background: #171717;
+      border: 1px solid #262626;
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .endpoint-url {
+      font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, monospace;
+      font-size: 0.9rem;
+      color: #60a5fa;
+      word-break: break-all;
+    }
+    .copy-btn {
+      background: #262626;
+      border: 1px solid #404040;
+      color: #e5e5e5;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .copy-btn:hover { background: #404040; }
+    .copy-btn.copied { background: #166534; border-color: #166534; color: #4ade80; }
+    .steps { list-style: none; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      padding: 0.75rem 0;
+      padding-left: 2.5rem;
+      position: relative;
+      line-height: 1.6;
+      color: #d4d4d4;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: #262626;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #a3a3a3;
+    }
+    .steps li + li { border-top: 1px solid #1a1a1a; }
+    code {
+      background: #262626;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.25rem;
+      font-family: "SF Mono", "Fira Code", Menlo, monospace;
+      font-size: 0.85rem;
+      color: #f5f5f5;
+    }
+    .section {
+      background: #171717;
+      border: 1px solid #262626;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+    .section h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .tools-grid {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .tool {
+      display: flex;
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+    .tool-name {
+      font-family: "SF Mono", "Fira Code", Menlo, monospace;
+      font-size: 0.8rem;
+      color: #a78bfa;
+      white-space: nowrap;
+    }
+    .tool-desc {
+      font-size: 0.85rem;
+      color: #a3a3a3;
+    }
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #262626;
+      font-size: 0.8rem;
+      color: #525252;
+      line-height: 1.6;
+    }
+    a { color: #60a5fa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">MCP Server</div>
+    <h1>Zei World MCP</h1>
+    <p class="subtitle">
+      Explore ESG &amp; CSR company data from <a href="https://zei.world/" target="_blank">Zei World</a> directly inside ChatGPT, Claude, or any MCP-compatible client.
+    </p>
+
+    <h2>Endpoint</h2>
+    <div class="endpoint-box">
+      <span class="endpoint-url" id="endpoint">https://zei-world-mcp.vercel.app/mcp</span>
+      <button class="copy-btn" onclick="copyEndpoint(this)">Copy</button>
+    </div>
+
+    <h2>Connect from ChatGPT</h2>
+    <ol class="steps">
+      <li>Open <strong>ChatGPT</strong> (desktop app or web)</li>
+      <li>Go to <strong>Settings</strong> &rarr; <strong>Tools &amp; integrations</strong></li>
+      <li>Click <strong>Add tool</strong> and select <strong>Connect a custom MCP server</strong></li>
+      <li>Give it a name (e.g. <code>Zei World</code>) and paste the endpoint URL above</li>
+      <li>Click <strong>Add</strong> &mdash; the 8 ESG tools will appear in your chat</li>
+    </ol>
+
+    <h2>Connect from Claude Desktop</h2>
+    <ol class="steps">
+      <li>Open your Claude Desktop config file:<br>
+        <code>~/.claude/claude_desktop_config.json</code> (macOS/Linux) or<br>
+        <code>%APPDATA%\Claude\claude_desktop_config.json</code> (Windows)
+      </li>
+      <li>Add the following to <code>"mcpServers"</code>:
+        <div class="endpoint-box" style="margin-top: 0.75rem;">
+          <span class="endpoint-url" id="claude-config" style="font-size: 0.8rem;">{
+  "zei-world": {
+    "type": "url",
+    "url": "https://zei-world-mcp.vercel.app/mcp"
+  }
+}</span>
+          <button class="copy-btn" onclick="copyConfig(this)">Copy</button>
+        </div>
+      </li>
+      <li>Restart Claude Desktop</li>
+    </ol>
+
+    <div class="section" style="margin-top: 2.5rem;">
+      <h3>Available tools</h3>
+      <div class="tools-grid">
+        <div class="tool"><span class="tool-name">list_sectors</span><span class="tool-desc">Browse all ESG sectors</span></div>
+        <div class="tool"><span class="tool-name">list_activities</span><span class="tool-desc">Sub-categories within a sector</span></div>
+        <div class="tool"><span class="tool-name">list_companies_by_activity</span><span class="tool-desc">Ranked companies in an activity</span></div>
+        <div class="tool"><span class="tool-name">search_company</span><span class="tool-desc">Find a company by name</span></div>
+        <div class="tool"><span class="tool-name">get_company_profile</span><span class="tool-desc">E/S/G scores &amp; classifications</span></div>
+        <div class="tool"><span class="tool-name">get_company_criteria</span><span class="tool-desc">Detailed criteria per category</span></div>
+        <div class="tool"><span class="tool-name">compare_companies</span><span class="tool-desc">Side-by-side comparison (2-5)</span></div>
+        <div class="tool"><span class="tool-name">get_activity_ranking</span><span class="tool-desc">Full ranking within an activity</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Try asking</h3>
+      <p style="color: #d4d4d4; line-height: 1.8; font-size: 0.9rem;">
+        &bull; "What are Patagonia's ESG scores?"<br>
+        &bull; "Compare Patagonia and The North Face"<br>
+        &bull; "Show me the best-ranked companies in organic farming"<br>
+        &bull; "How does LVMH score on governance criteria?"
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>
+        Source code on <a href="https://github.com/mcorbe/zei-world-mcp" target="_blank">GitHub</a>.
+        Data scraped from <a href="https://zei.world/" target="_blank">zei.world</a> &mdash; may break if the site structure changes.
+        Not affiliated with Zei World.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function copyEndpoint(btn) {
+      navigator.clipboard.writeText(document.getElementById("endpoint").textContent);
+      btn.textContent = "Copied!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
+    }
+    function copyConfig(btn) {
+      const config = `{
+  "zei-world": {
+    "type": "url",
+    "url": "https://zei-world-mcp.vercel.app/mcp"
+  }
+}`;
+      navigator.clipboard.writeText(config);
+      btn.textContent = "Copied!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
+    }
+  </script>
+</body>
+</html>
