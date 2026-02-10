@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "public",
+  "framework": null,
   "rewrites": [{ "source": "/mcp", "destination": "/api/mcp" }],
   "functions": { "api/mcp.ts": { "maxDuration": 30 } }
 }
