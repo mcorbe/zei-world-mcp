@@ -18,6 +18,8 @@ export async function handleListCompanies(args: z.infer<typeof listCompaniesSche
             page: args.page,
             companies: result.companies,
             count: result.companies.length,
+            unscoredCompanies: result.unscoredCompanies,
+            unscoredCount: result.unscoredCompanies.length,
             hasNextPage: result.hasNextPage,
           },
           null,

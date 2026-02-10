@@ -31,7 +31,7 @@ export function createServer(): McpServer {
 
   server.tool(
     "list_companies_by_activity",
-    "List companies ranked within a specific activity. Supports pagination. Returns company names and IDs.",
+    "List companies ranked within a specific activity. Supports pagination. Returns company names and IDs. Also includes unscored companies (listed on the site but without an ESG profile yet).",
     listCompaniesSchema.shape,
     handleListCompanies
   );

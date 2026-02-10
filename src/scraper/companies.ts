@@ -3,13 +3,13 @@ import { fetchPage } from "../fetcher.js";
 import { TTLCache, TTL } from "../cache.js";
 import type { CompanyListEntry } from "../types.js";
 
-const companiesCache = new TTLCache<{ companies: CompanyListEntry[]; hasNextPage: boolean }>();
+const companiesCache = new TTLCache<{ companies: CompanyListEntry[]; unscoredCompanies: string[]; hasNextPage: boolean }>();
 const brandsCache = new TTLCache<CompanyListEntry[]>();
 
 export async function fetchCompaniesByActivity(
   activitySlug: string,
   page: number = 1
-): Promise<{ companies: CompanyListEntry[]; hasNextPage: boolean }> {
+): Promise<{ companies: CompanyListEntry[]; unscoredCompanies: string[]; hasNextPage: boolean }> {
   const cacheKey = `${activitySlug}:${page}`;
   const cached = companiesCache.get(cacheKey);
   if (cached) return cached;
@@ -17,14 +17,19 @@ export async function fetchCompaniesByActivity(
   const html = await fetchPage(`/ranking/activity/${activitySlug}?page=${page}`);
   const $ = cheerio.load(html);
   const companies: CompanyListEntry[] = [];
+  const unscoredCompanies: string[] = [];
 
   $("tr.ranking-row").each((_, el) => {
     const row = $(el);
     const name = row.find(".ranking-row__title").text().trim();
+    if (!name) return;
+
     const link = row.find('a.ranking-row__link[href^="/pro/"]').attr("href") ?? "";
     const match = link.match(/\/pro\/(\d+)/);
-    if (name && match) {
+    if (match) {
       companies.push({ name, proId: parseInt(match[1], 10) });
+    } else {
+      unscoredCompanies.push(name);
     }
   });
 
@@ -41,7 +46,7 @@ export async function fetchCompaniesByActivity(
     }
   });
 
-  const result = { companies, hasNextPage };
+  const result = { companies, unscoredCompanies, hasNextPage };
   companiesCache.set(cacheKey, result, TTL.COMPANIES);
   return result;
 }
