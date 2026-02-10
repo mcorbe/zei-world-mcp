@@ -71,21 +71,23 @@ export async function fetchCompanyProfile(companyId: number): Promise<CompanyPro
     }
   });
 
+  const scores = {
+    environnement: scoreValues[0] ?? null,
+    social: scoreValues[1] ?? null,
+    gouvernance: scoreValues[2] ?? null,
+  };
+
   const profile: CompanyProfile = {
     name,
     proId: companyId,
     sector,
     activity,
     verificationDate,
-    scores: {
-      environnement: scoreValues[0] ?? null,
-      social: scoreValues[1] ?? null,
-      gouvernance: scoreValues[2] ?? null,
-    },
+    scores,
     classifications: {
-      environnement: classifications[0] ?? null,
-      social: classifications[1] ?? null,
-      gouvernance: classifications[2] ?? null,
+      environnement: scores.environnement !== null ? (classifications[0] ?? null) : null,
+      social: scores.social !== null ? (classifications[1] ?? null) : null,
+      gouvernance: scores.gouvernance !== null ? (classifications[2] ?? null) : null,
     },
     categoryScores,
   };
