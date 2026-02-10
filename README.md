@@ -84,6 +84,10 @@ api/
   mcp.ts            # Vercel serverless handler
 ```
 
+## Disclaimer
+
+This server works by scraping the public [zei.world](https://zei.world/) website. It relies heavily on the current HTML structure of the site and may break without warning if Zei World changes their pages. This project is not affiliated with or endorsed by Zei World.
+
 ## License
 
 MIT
